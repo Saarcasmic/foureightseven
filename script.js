@@ -1,49 +1,61 @@
-function showFeature(index) {
-    const headings = document.querySelectorAll('.heading');
-    const descriptions = document.querySelectorAll('.description');
+let currentIndex = 0; // Start with the first image as the default
 
-    // Remove active class from all headings and descriptions
-    headings.forEach(heading => heading.classList.remove('active'));
-    descriptions.forEach(description => description.classList.remove('active'));
+function changeImage(element, newIndex) {
+    const mainImage = document.getElementById('currentImage');
+    const currentSrc = mainImage.src;
+    const newSrc = element.src;
 
-    // Add active class to the selected heading and description
-    headings[index].classList.add('active');
-    descriptions[index].classList.add('active');
-}
+    if (newIndex > currentIndex) {
+        mainImage.classList.add('slide-right');
+        mainImage.classList.remove('slide-left');
+    } else if (newIndex < currentIndex) {
+        mainImage.classList.add('slide-left');
+        mainImage.classList.remove('slide-right');
+    }
 
-function changeImage(newSrc) {
-    const image = document.getElementById('currentImage');
+    // Update current index after setting animation
+    currentIndex = newIndex;
 
-    // Add the fade-out class
-    image.classList.add('fade-out');
-
-    // Wait for the fade-out transition to complete
+    // Ensure animation is seen by delaying src update slightly
     setTimeout(() => {
-        // Change the src attribute
-        
-
-        // Remove the fade-out class and add the fade-in class
-        image.classList.remove('fade-out');
-        image.classList.add('fade-in');
-
-        // Remove the fade-in class after the transition completes
-        setTimeout(() => {
-            image.classList.remove('fade-in');
-        }, 100);
-        image.src = newSrc; // This duration should match the transition duration in the CSS
-    }, 100);
+        mainImage.src = newSrc;
+        mainImage.classList.remove('slide-right', 'slide-left'); // Reset class to enable re-adding on next click
+    }, 200); // A slight delay to ensure class is applied before changing source
 }
-const dropdown = document.querySelector(".dropdown");
-const select = dropdown.querySelector(".select");
-const caret = dropdown.querySelector(".caret");
-const menu = dropdown.querySelector(".menu");
-const options = dropdown.querySelectorAll(".menu li");
-const selected = dropdown.querySelector(".selected");
-select.addEventListener("click", () => {
-    select.classList.toggle("select-clicked");
-    caret.classList.toggle("caret-rotate");
-    menu.classList.toggle("menu-open")
-})
+
+// Set the first feature as active by default
+document.addEventListener('DOMContentLoaded', () => {
+    const firstFeature = document.querySelector('.thumbnail');
+    changeImage(firstFeature); // Show content for the first feature
+});
+
+// Set the first feature as active by default
+document.addEventListener('DOMContentLoaded', () => {
+    const firstFeature = document.querySelector('.thumbnail');
+    changeImage(firstFeature); // Show content for the first feature
+});
+
+// Set the first feature as active by default
+document.addEventListener('DOMContentLoaded', () => {
+    const firstFeature = document.querySelector('.thumbnail');
+    changeImage(firstFeature); // Show content for the first feature
+});
+
+
+
+    const dropdown = document.querySelector(".dropdown");
+    const select = dropdown.querySelector(".select");
+    const caret = dropdown.querySelector(".caret");
+    const menu = dropdown.querySelector(".menu");
+    const options = dropdown.querySelectorAll(".menu li");
+    const selected = dropdown.querySelector(".selected");
+    
+    select.addEventListener("click", () => {
+        select.classList.toggle("select-clicked");
+        caret.classList.toggle("caret-rotate");
+        menu.classList.toggle("menu-open")
+    })
+
 options.forEach(option => {
     option.addEventListener("click", () => {
         selected.innerText = option.innerText;
@@ -60,17 +72,34 @@ options.forEach(option => {
 
 
 
-function showFeature(index) {
-    const headings = document.querySelectorAll('.heading');
-    const descriptions = document.querySelectorAll('.description');
 
-    // Remove active class from all headings and descriptions
-    headings.forEach(heading => heading.classList.remove('active'));
-    descriptions.forEach(description => description.classList.remove('active'));
 
-    // Add active class to the selected heading and description
-    headings[index].classList.add('active');
-    descriptions[index].classList.add('active');
+function showDescription(element) {
+    const content = JSON.parse(element.getAttribute('data-content'));
+    const descriptionBox = document.getElementById('descriptionBox');
+    descriptionBox.innerHTML = ''; // Clear existing content
+
+    content.headings.forEach((heading, index) => {
+        const headingElement = document.createElement('h2');
+        headingElement.innerText = heading;
+        descriptionBox.appendChild(headingElement);
+
+        const paragraphElement = document.createElement('p');
+        paragraphElement.innerText = content.paragraphs[index];
+        descriptionBox.appendChild(paragraphElement);
+    });
+
+    // Remove the active class from all features
+    const features = document.querySelectorAll('.feature');
+    features.forEach(feature => feature.classList.remove('active'));
+
+    // Add the active class to the clicked feature
+    element.classList.add('active');
 }
 
-
+// Set the first feature as active by default
+document.addEventListener('DOMContentLoaded', () => {
+    const firstFeature = document.querySelector('.feature');
+    showDescription(firstFeature); // Show content for the first feature
+    firstFeature.classList.add('active');
+});

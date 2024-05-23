@@ -11,11 +11,13 @@
         }
 
         .lefty {
+            position: fixed;  /* Changed from sticky to fixed */
+            top: 0;           /* Aligns the top of the element with the viewport */
+            left: 0;          /* Aligns the left of the element with the viewport */
+            margin-top: 0;    /* Adjusted to 0 since it won't be necessary */
+            height: 100vh; 
             width: 50%;
-            float: left;
-            position: sticky;
-            margin-top: -27px;
-
+            
         }
 
         .righty {
@@ -34,6 +36,7 @@
 
         .cart {
             padding-left: 30px;
+            display: flex;
         }
 
         .topic {
@@ -61,10 +64,11 @@
             margin-top: 20px;
             width: 510.1px;
             padding: 20px;
+            padding-left: 30px;
             font-weight: 500;
             border: 0.8px solid black;
             background-color: #fff4ec;
-            height: 703.2px;
+           
             margin-left: 135px;
             margin-right: 120px;
             border-radius: 20px;
@@ -82,12 +86,16 @@
             border: 0.8px solid black;
             background-color: #fff4ec;
             width: 107.95px;
+            cursor: pointer;
             height: 80px;
             border-radius: 10px;
             text-align: center;
             margin-right: 10px;
             overflow: hidden;
+        }
 
+        .boxinner:hover {
+            background-color: rgba(246, 230, 217, 255);
         }
 
         .buttoninner {
@@ -113,14 +121,27 @@
 
         }
 
+        .thumbo {
+            display: flex;
+            gap: 10px;
+            flex-direction: row;
+            padding-left: 30px;
+            margin-top: -670px;
+
+        }
+
         .imager {
             height: 799px;
+            margin-top: -29px;
+            
+            transition: transform 0.5s ease-out;
         }
 
         .thumbnail {
 
             width: 60px;
             height: 60px;
+            margin-top: -1px;
             border-radius: 50%;
             border-width: 1.6px;
             cursor: pointer;
@@ -128,11 +149,33 @@
             border-color: black;
         }
 
+       
+
         .thumbnail img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
+        }
+
+            /* Classes for animation */
+        .slide-right {
+            animation: slideInRight 0.5s forwards;
+        }
+
+        .slide-left {
+            animation: slideInLeft 0.2s forwards;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(0%); }
+            to { transform: translateX(-100%); }
+            
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0%); }
         }
 
         .clickable {
@@ -162,7 +205,7 @@
             display: inline-block;
         }
 
-        .dot:hover {
+        .clickable:hover .dot {
             background-color: #9eef80;
         }
 
@@ -188,14 +231,7 @@
             transition: 0.3s;
         }
 
-        .select-clicked {
-            border: 2px #26489a solid;
-            box-shadow: 0 0 0.8em #26489a;
-        }
-
-        .select:hover {
-            background: #F6E6D9;
-        }
+        
 
         .caret {
             width: 0;
@@ -225,14 +261,14 @@
 
         .menu {
             list-style: none;
-            padding: 0.2em 0.5em;
             background: #fff4ec;
             border: 1px #363a43 solid;
+            border-top: none;
             box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
             border-radius: 0.5em;
             color: #323741;
             position: absolute;
-            top: 4em;
+           
             left: 50%;
             width: 100%;
             transform: translateX(-50%);
@@ -261,6 +297,76 @@
             display: block;
             opacity: 1;
         }
+
+        .description {
+                
+            padding: 10px;
+            border-color: black;
+            border-width: 0.8px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+
+        
+        }
+
+        .boxbiggerr {
+            margin-top: 40px;
+            width: 510.1px;
+            font-weight: 500;
+            background-color: rgba(246, 230, 217, 255);
+            margin-left: 135px;
+            
+        }
+
+        .features {
+            display: flex;
+            
+            
+        }
+
+        .feature {
+            flex: 1;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-color: black;
+            border-width: 0.8px;
+            padding: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            color: #3c422e;
+            height: 40px;
+            
+        }
+
+        .feature:hover {
+            background-color: #f0f0f0;
+            
+        }
+
+        .feature.active {
+            background-color: #3c422e;
+            color: #f6e6d9;
+            
+            
+        }
+
+        .hoverable-svg {
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+        }
+
+        .hoverable-svg:hover .background-circle {
+            fill: #d8e434; /* Change this to the desired hover color */
+        }
+       
+
+
+
+
+
+
     </style>
 
 </head>
@@ -269,24 +375,28 @@
 
 
     <div class="lefty">
-
         <img class="imager"
             src="https://www.graza.co/cdn/shop/products/graza-pdp-duo-header-3_2x_940c942a-d4de-4242-a70a-72f97ecd08b2.jpg?v=1668255245&width=1024"
-            alt="Main Image" id="currentImage">
+            alt="Main Image" id="currentImage" >
+        
+        
 
         <div class="thumbnails">
             <img src="https://www.graza.co/cdn/shop/products/graza-pdp-duo-header-3_2x_940c942a-d4de-4242-a70a-72f97ecd08b2.jpg?v=1668255245&width=1024"
-                alt="Thumbnail 1" class="thumbnail" onclick="changeImage(this)">
+                alt="Thumbnail 1" class="thumbnail" onclick="changeImage(this,0)">
             <img src="https://www.graza.co/cdn/shop/files/Resize9_4094008f-df38-4c7a-8fa3-e90927e07798.png?v=1715047934&width=1024"
-                alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this)">
+                alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this,1)">
             <img src="https://www.graza.co/cdn/shop/products/graza-pdp-sizzle-header-3_2x_98f6ef49-281f-4095-b8bb-3045391401fe.jpg?v=1715047934&width=1024"
-                alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
+                alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this,2)">
             <img src="https://www.graza.co/cdn/shop/products/graza-pdp-drizzle-header-3_2x_569477b7-acf0-4950-93a4-c263d6893aa4.jpg?v=1715047934&width=1024"
-                alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
+                alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this,3)">
             <img src="https://www.graza.co/cdn/shop/files/Resize5_1a0df87c-aa13-46f1-b9d6-29b076bf96b0.png?v=1715047934&width=1024"
-                alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
+                alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this,4)">
             <img src="https://www.graza.co/cdn/shop/products/graza-home-sizzle-in-usecopy_2x_47ab5af6-0732-4835-96ba-9853798e5b9d.jpg?v=1715047934&width=1024"
-                alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
+                alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this,5)">
+        </div>
+        <div  class="thumbo">
+            <svg class="" width="198" height="54" viewBox="0 0 132 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M130.33 35.701H122.795C121.718 35.701 121.422 34.5052 122.176 33.4837C122.579 32.8609 123.306 31.7398 123.306 29.9709C123.306 27.6042 121.314 26.0346 117.063 26.0346C112.353 26.0346 110.039 27.5045 110.039 29.9211C110.039 31.6651 111.061 32.537 111.976 33.3841C113.349 34.6547 112.703 35.701 111.68 35.701H69.2418C67.8694 35.701 67.6541 34.4803 68.4345 33.4339C69.2418 32.2879 70.3721 31.5903 70.3721 29.8215C70.3721 27.4048 68.273 26.0346 64.1826 26.0346C59.7692 26.0346 57.2126 27.4547 57.2126 29.8713C57.2126 31.391 57.8316 32.8609 58.5851 33.5585C59.6077 34.6048 59.1502 35.701 58.3698 35.701H46.529C43.8648 35.701 43.1382 33.9073 43.1382 33.0851V27.3052C43.1382 23.4685 40.5279 20.3294 36.4374 20.3294H34.0692V24.3156C34.0692 27.928 34.8497 30.4194 35.4417 32.6616C35.8992 34.3806 34.7689 35.701 32.8852 35.701H22.6321C19.4566 35.701 18.73 33.3343 18.0841 33.3343C17.0615 33.3343 17.3575 36 11.2219 36C4.03664 35.9751 0 30.818 0 19.2581C0 6.55225 4.60177 0 13.0518 0C17.1961 0 18.9991 2.36678 20.0756 2.36678C21.2058 2.36678 21.152 0.099654 23.1972 0.099654C24.4889 0.099654 24.7311 1.6692 24.166 3.5128C23.4394 5.7301 22.8474 7.59862 22.6859 10.9121C22.5783 12.4817 22.2284 13.1045 21.5018 13.1045C18.8915 13.1045 19.349 5.70519 13.2671 5.70519C7.72344 5.70519 5.1669 11.5848 5.1669 19.1336C5.1669 26.0097 7.61579 30.3197 12.2445 30.3197C16.604 30.3197 18.434 27.8035 18.434 25.0131C18.434 22.6962 17.0077 21.5502 13.9668 20.8028C11.5179 20.1799 12.0292 17.1156 14.1282 17.1156H24.3275C25.7538 17.1156 26.4804 20.0554 24.2737 20.8526C22.7397 21.4754 22.0131 23.4187 22.0131 26.2588C22.0131 29.946 23.251 31.8893 25.3501 31.8893C27.2339 31.8893 28.2296 30.9426 28.9831 27.1557C30.0057 22.4221 29.6558 14.4498 29.602 8.89412C29.5482 6.32803 28.8216 3.91142 28.2834 3.16401C27.2069 1.54464 27.7721 0.174394 29.5213 0.174394H37.6753C45.0489 0.174394 49.4085 3.96125 49.4085 10.2145C49.4085 14.0512 46.9596 17.3149 42.9498 18.7848C46.9327 20.5785 48.332 23.2443 48.7895 26.8817C49.247 30.5689 49.9736 31.5156 50.8886 31.5156C51.6959 31.5156 52.261 30.3696 53.1491 26.6325C53.9295 23.4934 57.0512 11.1862 57.5087 8.6699C57.9661 6.15363 57.6163 3.88651 57.105 2.31696C56.7013 0.99654 57.0512 0.124567 58.2891 0.124567H69.5109C70.8296 0.124567 71.0987 1.22076 70.8296 2.26713C70.5605 3.26367 70.2644 4.63391 70.2644 6.8263C70.2644 10.3391 74.5164 24.9882 75.2699 27.5543C76.4001 31.117 77.0191 32.4374 78.0955 32.4374C79.5756 32.4374 79.7371 31.2166 82.2936 26.2339C83.8814 23.1446 88.5908 15.1972 89.9363 13.0547C91.5779 10.3889 92.6543 8.96886 92.6543 7.42422C92.6543 6.15363 91.7393 5.33149 89.4788 5.33149C86.5994 5.33149 85.1731 6.60208 84.5541 7.99723C83.989 9.21799 84.0966 10.3142 84.1505 12.9799C84.2043 14.7737 82.7242 16.3433 81.0826 16.3433C78.9836 16.3433 77.961 14.7737 77.961 13.4533C77.961 10.937 80.356 11.0367 80.356 8.79446C80.356 6.70173 79.7371 4.11073 78.3108 2.16747C77.6918 1.37024 78.2032 0.174394 80.1138 0.174394H99.7857C102.45 0.174394 102.907 2.31695 101.32 4.4346C97.875 9.0436 93.7846 16.1439 89.129 24.0664C87.8911 26.1592 87.4336 27.2554 87.4336 28.7003C87.4336 30.0706 88.6177 31.391 91.9277 31.391C93.8115 31.391 95.2647 30.1702 95.9644 29.1239C96.9332 27.8035 96.8793 25.6111 96.8793 23.3439C96.8793 20.2048 98.4133 18.7349 100.458 18.7349C101.939 18.7349 103.365 19.582 103.365 21.6249C103.365 22.7211 103.15 23.3439 101.939 24.8138C101.077 25.8104 100.755 26.9066 100.862 28.4263C101.131 31.3163 101.723 32.4125 102.719 32.4125C104.253 32.4125 104.468 31.2166 105.222 28.2768C106.406 23.7176 109.258 12.7308 110.039 9.74118C110.819 6.75156 111.115 4.11073 110.146 2.19239C109.581 1.14602 110.146 0.149481 111.331 0.149481H123.064C124.14 0.149481 124.651 1.09619 124.194 2.36678C123.575 4.08581 123.575 6.35294 124.086 9.56678C124.598 12.8305 126.858 21.7495 127.935 26.0595C128.957 30.0955 129.926 31.4657 131.379 32.9855C132.59 34.3308 131.917 35.701 130.33 35.701ZM37.0294 16.7419C41.389 16.7419 43.7841 14.2754 43.7841 10.5882C43.7841 7.39931 41.8465 5.03253 38.5634 5.03253C35.6032 5.03253 34.0961 6.6519 34.0961 9.81592V16.7419H37.0294ZM67.8963 21.9488C65.1244 8.09689 65.0706 6.30311 63.752 6.30311C62.4603 6.30311 62.4334 8.02214 59.5001 21.9488H67.8963ZM121.126 21.9488C118.3 8.04706 118.247 6.25329 116.928 6.25329C115.636 6.25329 115.636 7.97232 112.73 21.9488H121.126Z" fill="currentColor"></path></svg>
         </div>
     </div>
 
@@ -297,9 +407,20 @@
             <button style="margin-right: 35px;font-weight: 500;">About</button>
             <button style="margin-right: 35px;font-weight: 500;">Glog</button>
             <div class="cart">
+                
+                <svg class="hoverable-svg" width="39" height="39" viewBox="0 0 39 39" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Circle -->
+                    <circle class="background-circle" cx="18" cy="19" r="18" fill="#FFF4EC" stroke="#3C422E" stroke-width="1.32522" />
+                
+                    <!-- Head Circle -->
+                    <circle cx="18" cy="15" r="7" fill="#FFF4EC" stroke="#3C422E" stroke-width="1.32522" />
+                
+                    <!-- Body Rectangle -->
+                    <rect x="6.66261" y="22.1089" width="23.124" height="14.4566" rx="9.72831" fill="#FFF4EC" stroke="#3C422E" stroke-width="1.32522" />
+                </svg>
                 <button
-                    class="bg-white hover:bg-customYellow text-black font-semibold border border-black py-2 px-4 rounded-full"
-                    style="width: 104px; height: 36px; padding-top: 4px;">
+                    class="bg-defau hover:bg-customYellow text-black font-semibold border border-black py-2 px-4 rounded-full"
+                    style="width: 104px; height: 36px; padding-top: 4px; margin-left: 20px;">
                     Cart[0]
                 </button>
             </div>
@@ -404,13 +525,13 @@
             </div>
 
             <div class="dropdown">
-                <div class="select">
+                <div class="select" onclick="toggleDropdown(this)">
                     <span class="selected">Frequency: Every 1 Month</span>
                     <div class="caret"></div>
                 </div>
                 <ul class="menu">
-                    <li>Every 2 Month</li>
-                    <li>Every 3 Month</li>
+                    <li onclick="selectOption(this)">Every 2 Month</li>
+                    <li onclick="selectOption(this)">Every 3 Month</li>
                 </ul>
             </div>
 
@@ -456,58 +577,54 @@
             <div
                 style="border-top: black; border-style: dashed; border-width: 0.8px; display: flex; flex-direction: column; align-items: center;">
                 <button
-                    class="bg-customYellow margin-top: 50px; text-gray-800 font-semibold py-2 px-2 border-top border-black rounded-full "
-                    style="margin-top: 20px; height: 48px; width: 470px;">
+                    class="bg-customYellow text-gray-800 font-semibold py-1 px-4 border border-black rounded "
+                    style="margin-top: 20px; height: 38px; width: 460px; border-radius: 20px;">
                     Subscribe - $33.30
                 </button>
                 <p></p>
-                <span style="font-weight: 400;">Edit or Cancel Anytime</span>
+                <span style="font-weight: 200;">Skip, Edit or Cancel Anytime</span>
             </div>
-
-
-
 
         </div>
 
         <div class="boxbigger" style="height: 80px; margin-top: 20px; padding: 16px;">
-            <div style="display: flex; align-items: center; ">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
                 <img src="https://cdn.shopify.com/s/files/1/0550/0003/9638/files/graza-gift-icon.png?v=1705684468"
-                    alt="Description of the image" height="75" width="75" style="margin-top: 15px; margin-right: 15px;">
-                Buying multiple gifts? Send to multiple addresses
-                <a href="https://gifts.zest.co/graza" target="”_blank”" style="text-decoration: underline;">here</a>.
+                    alt="Description of the image" height="75" width="75" style="margin-right: 15px;" >
+                <div style="display: flex; flex-direction: column; font-weight: 400;">
+                    <span>Buying multiple gifts? Send to multiple addresses</span>
+                    <span>
+                        <a href="https://gifts.zest.co/graza" target="”_blank”" style="text-decoration: underline;">here</a>.
+                    </span>
+                </div>
+                
+                
             </div>
         </div>
 
-        <div class="feature-box" style="width: 300px; border: 1px solid #ccc; padding: 20px;margin: 50px auto;">
-            <div class="headings" style="display: flex; justify-content: space-between;">
-                <button class="heading active" onclick="showFeature(0)" style="background-color: #ddd;
-                font-weight: bold;">Feature 1</button>
-                <button class="heading" onclick="showFeature(1)" style="background-color: #f0f0f0;
-                border: 1px solid #ccc;
-                padding: 10px;
-                cursor: pointer;
-                flex-grow: 1;
-                text-align: center;">Feature 2</button>
-                <button class="heading" onclick="showFeature(2)" style="background-color: #f0f0f0;
-                border: 1px solid #ccc;
-                padding: 10px;
-                cursor: pointer;
-                flex-grow: 1;
-                text-align: center;">Feature 3</button>
-                <button class="heading" onclick="showFeature(3)" style="background-color: #f0f0f0;
-                border: 1px solid #ccc;
-                padding: 10px;
-                cursor: pointer;
-                flex-grow: 1;
-                text-align: center;">Feature 4</button>
+        <div class="boxbiggerr">
+            <div class="features">
+                <div class="feature" data-content='{"headings": ["DRIZZLE: 500ML","SIZZLE: 750ML"], "paragraphs": ["Extra Virgin finishing oil made from olives that are picked early, when flavor is bold and antioxidants are highest. Made for eating, not heating.", "Extra Virgin cooking oil made from mature, mid-season olives that yield a more mellow flavor. Use it every day, in every way."]}' onclick="showDescription(this)">
+                    Details
+                </div>
+                <div class="feature" data-content='{"headings": ["DRIZZLE:","SIZZLE:"], "paragraphs": ["Harvested in October, before the olives have ripened fully. Picked by hand because young olives need a firm yank to loosen up.", "Harvested in November and December, when the olives are more mature. They’re pretty laid back by this point, so it only takes a few shakes to get them off the branch."]}' onclick="showDescription(this)">
+                    Harvest
+                </div>
+                <div class="feature" data-content='{"headings": ["DRIZZLE:", "SIZZLE:"], "paragraphs": ["A little Drizzle goes a long way! Put it on your ice cream or popcorn, whip up a pesto or salad dressing, or drink it straight from a spoon (we won’t tell).", "If you would put it in or on top of an oven, use Sizzle. Chicken cutlets, sheet pan veggies, fried rice, or even chocolate chip cookies! You name it, Sizzle Sizzles it."]}' onclick="showDescription(this)">
+                    Uses
+                </div>
+                <div class="feature" data-content='{"headings": ["“DRIZZLE” REFILL CAN: 500 ML", "“SIZZLE” REFILL CAN: 750 ML"], "paragraphs": ["", "Perfectly portioned and 100% recyclable, our “beer can” refills are designed to keep your delicious olive oil super fresh. Just crack open, pour into a squeeze bottle (using a kitchen funnel!) and get cookin."]}' onclick="showDescription(this)">
+                    Refill
+                </div>
             </div>
-            <div class="descriptions" style="margin-top: 20px;">
-                <div class="description active" id="feature-0">Description for Feature 1</div>
-                <div class="description" id="feature-1" style="display: none;">Description for Feature 2</div>
-                <div class="description" id="feature-2" style="display: none;">Description for Feature 3</div>
-                <div class="description" id="feature-3" style="display: none;">Description for Feature 4</div>
+            <div class="description" id="descriptionBox">
+                <h2 id="descriptionHeading">Feature 1</h2>
+                <p id="descriptionText">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
         </div>
+
+        <p></p>
+
     </div>
 
     <script src="./script.js"></script>
